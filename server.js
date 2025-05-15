@@ -5,17 +5,15 @@ const bodyParser = require("body-parser")
 const app = express()
 app.use(bodyParser.json())
 
-// Skapa databasanslutning
 async function getDBConnection() {
     return await mysql.createConnection({
         host: "localhost",
         user: "root",
-        password: "",        // byt ut vid behov
-        database: "mydbd",   // <-- här är ändringen
+        password: "",       
+        database: "mydbd",   
     })
 }
 
-// Enkel API-dokumentation
 app.get("/", (req, res) => {
     res.send(`
     <h1>Users API Dokumentation</h1>
@@ -27,14 +25,12 @@ app.get("/", (req, res) => {
   `)
 })
 
-// Hämta alla användare
 app.get("/users", async (req, res) => {
     const db = await getDBConnection()
     const [rows] = await db.execute("SELECT * FROM users")
     res.json(rows)
 })
 
-// Hämta en användare med ID
 app.get("/users/:id", async (req, res) => {
     const db = await getDBConnection()
     const [rows] = await db.execute("SELECT * FROM users WHERE id = ?", [req.params.id])
@@ -46,7 +42,6 @@ app.get("/users/:id", async (req, res) => {
     res.json(rows[0])
 })
 
-// Skapa ny användare
 app.post("/users", async (req, res) => {
     const { name } = req.body
 
@@ -60,7 +55,6 @@ app.post("/users", async (req, res) => {
     res.status(201).json({ id: result.insertId, name })
 })
 
-// Starta server
 const port = 3000
 app.listen(port, () => {
     console.log(`Servern körs på http://localhost:${port}`)
