@@ -16,7 +16,7 @@ async function getDBConnection() {
 
 app.get("/", (req, res) => {
     res.send(`
-    <h1>Users API Dokumentation</h1>
+    <h1>Ling Gang Goo API</h1>
     <ul>
       <li>GET /users - Hämtar alla användare</li>
       <li>GET /users/:id - Hämtar en användare med ID</li>
@@ -57,5 +57,5 @@ app.post("/users", async (req, res) => {
 
 const port = 3000
 app.listen(port, () => {
-    console.log(`Servern körs på http://localhost:${port}`)
+    console.log(`Bing Bang Bong Gong--> http://localhost:${port}`)
 })
